@@ -1,0 +1,26 @@
+# create mission
+POST http://localhost:8000/api/missions
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 59|QvORzTmTynaEt0l7tVySTb96cgxxzKT4KweJpjQE65c3b776
+
+{
+    "title": "New Mission",
+    "description": "This is a new mission.",
+    "from": "2024-06-01 10:00:00",
+    "to": "2024-06-05 18:00:00",
+    "when": "2024-06-03 12:00:00",
+    "distance": 15.5,
+}
+curl -X POST http://localhost:8000/api/missions \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer 59|QvORzTmTynaEt0l7tVySTb96cgxxzKT4KweJpjQE65c3b776" \
+    -d '{
+        "title": "New Mission",
+        "description": "This is a new mission.",
+        "from": "2024-06-01 10:00:00",
+        "to": "2024-06-05 18:00:00",
+        "when": "2024-06-03 12:00:00",
+        "distance": 15.5
+    }'
