@@ -66,7 +66,7 @@ export default function Login() {
                             Sign In
                         </button>
                         <p className="text-center text-gray-500 text-sm">
-                            Don't have an account? <a href="/register" className="text-purple-600 hover:text-purple-700 font-medium">Register</a>
+                            Don't have an account? <button type="button" onClick={() => navigate("/register")} className="text-purple-600 hover:text-purple-700 font-medium">Register</button>
                         </p>
                     </form>
                 </div>
