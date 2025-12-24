@@ -14,17 +14,17 @@ class UserSeeder extends Seeder
     {
         // create operator and mover
         \App\Models\User::factory()->create([
-            'name' => 'Operator User',
-            'email' => 'operator@example.com',
+            'name' => env('OPERATOR_NAME', 'Operator User'),
+            'email' => env('OPERATOR_MAIL', 'operator@example.com'),
             'role' => 'operator',
             'password' => bcrypt('password123'),
         ]);
 
         \App\Models\User::factory()->create([
-            'name' => 'Mover User',
-            'email' => 'mover@example.com',
+            'name' => env('MOVER_NAME', 'Mover User'),
+            'email' => env('MOVER_MAIL', 'mover@example.com'),
             'role' => 'mover',
-            'password' => bcrypt('password123'),
+            'password' => bcrypt(env('PASSWORD', 'password')),
         ]);
     }
 }
