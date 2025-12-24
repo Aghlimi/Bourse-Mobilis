@@ -2,8 +2,8 @@ import React from "react";
 import MissionCard from "./missionCard";
 import type { Mission } from "../../../types";
 
-export default function missions() {
-    const [Missions, setMissions] = React.useState<Array<Mission>>([]);
+export default function Missions() {
+    const [missions, setMissions] = React.useState<Array<Mission>>([]);
     React.useEffect(() => {
         fetch(`${import.meta.env.VITE_BACKEND}/api/missions/my/missions`, {
             headers: {
@@ -31,12 +31,12 @@ export default function missions() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {
-                    Missions.map((mission: Mission) => (
+                    missions.map((mission: Mission) => (
                         <MissionCard key={mission.id} mission={mission} />
                     ))
                 }
             </div>
-            {Missions.length === 0 && (
+            {missions.length === 0 && (
                 <div className="text-center py-16 bg-white/50 rounded-2xl border border-gray-100">
                     <div className="text-6xl mb-4">📋</div>
                     <p className="text-gray-500 text-lg">You haven't created any missions yet</p>

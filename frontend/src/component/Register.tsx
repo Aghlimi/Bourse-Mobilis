@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function Register() {
     const navigate = useNavigate();
@@ -86,7 +86,7 @@ export default function Register() {
                             Create Account
                         </button>
                         <p className="text-center text-gray-500 text-sm">
-                            Already have an account? <a href="/login" className="text-blue-600 hover:text-blue-700 font-medium">Sign In</a>
+                            Already have an account? <Link to="/login" className="text-blue-600 hover:text-blue-700 font-medium">Sign In</Link>
                         </p>
                     </form>
                 </div>

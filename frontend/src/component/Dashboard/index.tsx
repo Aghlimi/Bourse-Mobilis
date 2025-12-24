@@ -4,21 +4,23 @@ import Home from "./Home";
 import CreateMission from "./missions/create";
 import Missions from "./missions/missions";
 import PendedMissions from "./missions/pended";
-import Mission from "./missions/mission";
+import MissionDetail from "./missions/mission";
 import { AppContext } from "../../context";
 
 
 export default function Dashboard() {
-    const {me, setMe} = React.useContext(AppContext);
+    const context = React.useContext(AppContext);
+    const me = context?.me;
+    const setMe = context?.setMe;
     const navigate = useNavigate();
 
-    if (me === undefined) {
-        navigate('/login');
-        return null;
-    }
+    React.useEffect(() => {
+        if (me === undefined) {
+            navigate('/login');
+        }
+    }, [me, navigate]);
 
     React.useEffect(() => {
-
         fetch(`${import.meta.env.VITE_BACKEND}/api/users`, {
             headers: {
                 'accept': 'application/json',
@@ -27,11 +29,11 @@ export default function Dashboard() {
         })
             .then(async (response) => {
                 if (!response.ok && response.status === 401)
-                    setMe(undefined);
+                    setMe?.(undefined);
                 const data = await response.json();
-                setMe(data);
+                setMe?.(data);
             });
-    }, []);
+    }, [setMe]);
 
     const changePage = (page: '/' | '/missions/create' | '/missions' | '/missions_pended') => {
         navigate(`/dashboard${page}`);
@@ -83,7 +85,7 @@ export default function Dashboard() {
                     <Route path="/" element={<Home />} />
                     <Route path="/missions/create" element={<CreateMission />} />
                     <Route path="/missions" element={<Missions />} />
-                    <Route path="/missions/:id" element={<Mission />} />
+                    <Route path="/missions/:id" element={<MissionDetail />} />
                     {me?.role === 'operator' &&
                         (<Route path="/missions_pended" element={<PendedMissions />} />)}
                 </Routes>

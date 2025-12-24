@@ -3,7 +3,8 @@ import { AppContext } from "../../../context";
 
 export default function Proposals({ missionId, creater }: { missionId?: number, creater?: number }) {
     const [proposals, setProposals] = React.useState<Array<any>>([]);
-    const { me } = React.useContext(AppContext);
+    const context = React.useContext(AppContext);
+    const me = context?.me;
     React.useEffect(() => {
         fetch(`${import.meta.env.VITE_BACKEND}/api/missions/${missionId}/proposals/`, {
             headers: {
