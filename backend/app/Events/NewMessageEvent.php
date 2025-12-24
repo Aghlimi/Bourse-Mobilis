@@ -14,7 +14,7 @@ class NewMessageEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public message;
+    public $message;
 
     /**
      * Create a new event instance.

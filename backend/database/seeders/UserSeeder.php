@@ -12,6 +12,19 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        // create operator and mover
+        \App\Models\User::factory()->create([
+            'name' => 'Operator User',
+            'email' => 'operator@example.com',
+            'role' => 'operator',
+            'password' => bcrypt('password123'),
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'Mover User',
+            'email' => 'mover@example.com',
+            'role' => 'mover',
+            'password' => bcrypt('password123'),
+        ]);
     }
 }

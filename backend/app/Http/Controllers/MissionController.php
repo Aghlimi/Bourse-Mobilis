@@ -82,7 +82,10 @@ class MissionController extends Controller
 
     public function accept(Request $request, int $id)
     {
-        $data = $request->all();
+        $data = $request->validate([
+            'reason' => 'nullable|string|max:500',
+        ]);
+        
         if (auth()->user()->role !== 'operator')
             return response()->json(['error' => 'Only operators can accept missions'], 403);
 
@@ -94,10 +97,11 @@ class MissionController extends Controller
         if ($mission->status !== 'PENDING')
             return response()->json(['error' => 'Mission not available for acceptance'], 400);
 
-        $mission->status = $data['reason'] != null ? 'REJECTED' : 'PUBLISHED';
-        $mission->rejection_reason = $data['reason'];
+        $reason = $data['reason'] ?? null;
+        $mission->status = $reason !== null ? 'REJECTED' : 'PUBLISHED';
+        $mission->rejection_reason = $reason;
         $mission->save();
-        event( $data['reason'] != null ? new \App\Events\MissionRejectedEvent($mission) : new \App\Events\MissionAcceptedEvent($mission));
+        event($reason !== null ? new \App\Events\MissionRejectedEvent($mission) : new \App\Events\MissionAcceptedEvent($mission));
         $creator = $mission->createdBy()->first(['id', 'name', 'email']);
         $assignee = $mission->assignedTo()->first(['id', 'name', 'email']);
 

@@ -91,6 +91,6 @@ class ProposalController extends Controller
         $proposal->status = 'REJECTED';
         $proposal->save();
         event(new \App\Events\PropositionRejectedEvent($proposal));
-        return response()->json(['message' => 'Proposal rejected`.']);
+        return response()->json(['message' => 'Proposal rejected.']);
     }
 }
