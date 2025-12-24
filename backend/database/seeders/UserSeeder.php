@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'name' => env('OPERATOR_NAME', 'Operator User'),
             'email' => env('OPERATOR_MAIL', 'operator@example.com'),
             'role' => 'operator',
-            'password' => bcrypt('password123'),
+            'password' => bcrypt(env('PASSWORD', 'password')),
         ]);
 
         \App\Models\User::factory()->create([

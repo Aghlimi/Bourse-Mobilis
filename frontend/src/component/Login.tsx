@@ -11,6 +11,9 @@ export default function Login() {
         const formData = new FormData(form);
         fetch(import.meta.env.VITE_BACKEND + "/api/login", {
             method: "POST",
+            headers:{
+                'accept': 'application/json'
+            },
             body: formData
         }).then(async (response) => {
             const data = await response.json();
