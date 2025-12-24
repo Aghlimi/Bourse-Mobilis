@@ -12,6 +12,9 @@ RUN composer install --no-dev --optimize-autoloader
 
 RUN php artisan key:generate && php artisan optimize
 
+# COPY ./entry-point.sh /entry-point.sh
+RUN chmod +x /app/entry-point.sh
+
 EXPOSE 8000
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD ["/app/entry-point.sh"]
